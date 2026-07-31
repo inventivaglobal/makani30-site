@@ -87,7 +87,10 @@ header nav a:hover{opacity:1;color:var(--gold)}
 @keyframes cue{0%{transform:translateY(-22px)}100%{transform:translateY(44px)}}
 .hero-stat{position:absolute;bottom:34px;display:flex;gap:44px;left:clamp(20px,4vw,54px)}
 .hero-stat div{display:flex;flex-direction:column;gap:3px}
-.hero-stat b{font-family:var(--serif);font-size:34px;line-height:1;color:var(--paper)}
+.hero-stat b{font-family:var(--serif);font-size:34px;line-height:1;color:var(--paper);
+  display:inline-block;animation:breathe 5s ease-in-out infinite}
+.hero-stat div:nth-child(2) b{animation-delay:.6s}.hero-stat div:nth-child(3) b{animation-delay:1.2s}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.94}50%{transform:scale(1.04);opacity:1}}
 .hero-stat span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
 
 /* ---------- marquee ---------- */
@@ -108,9 +111,15 @@ section.blk{padding:clamp(80px,11vw,150px) 0;position:relative}
 .story{background:var(--paper);color:var(--ink)}
 .story .over{color:var(--gold-dk)}
 .story .lede{color:#5C5248}
-.tl{border-top:1px solid rgba(20,17,16,.12)}
+.tl{border-top:1px solid rgba(20,17,16,.12);position:relative;padding-left:44px}
+.tl::before{content:"";position:absolute;left:14px;top:0;bottom:34px;width:2px;
+  background:linear-gradient(var(--gold-dk),rgba(169,126,79,.15))}
 .tl-row{display:grid;grid-template-columns:120px 1fr 200px;gap:30px;align-items:center;
-  padding:34px 0;border-bottom:1px solid rgba(20,17,16,.1)}
+  padding:34px 0;border-bottom:1px solid rgba(20,17,16,.1);position:relative}
+.tl-row::before{content:"";position:absolute;left:-36px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;border-radius:50%;background:var(--gold-dk);box-shadow:0 0 0 5px var(--paper);
+  transition:transform .4s var(--ease),box-shadow .4s}
+.tl-row:hover::before{transform:translateY(-50%) scale(1.25);box-shadow:0 0 0 5px var(--paper),0 0 0 9px rgba(199,154,98,.2)}
 .tl-year{font-family:var(--serif);font-size:clamp(30px,3vw,44px);color:var(--gold-dk)}
 .tl-txt{font-size:16px;line-height:1.7;color:#5C5248;max-width:560px}
 .tl-img{width:180px;height:180px;border-radius:50%;overflow:hidden;justify-self:end;
