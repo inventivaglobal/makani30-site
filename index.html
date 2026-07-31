@@ -37,6 +37,10 @@ input,textarea{-webkit-user-select:text;user-select:text}
   white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.22)}
 .draft-wm.big{font-size:clamp(20px,2.4vw,42px);right:22px;bottom:20px;color:rgba(255,255,255,.22)}
 .draft-cover{position:absolute;inset:0;z-index:3;background:transparent}
+/* interactive UI must sit ABOVE the draft cover (play buttons, controls, CTAs, links) */
+.feat .inner,.play,.hero-content,.hero-stat,.scrollcue,.hero-cta,.lbl,.brands .sec-head,.dep .list,#vmodal{position:relative;z-index:20}
+#vmodal{z-index:9000}
+.play{cursor:pointer}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
 .serif{font-family:var(--serif);font-weight:400}
