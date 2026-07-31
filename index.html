@@ -27,7 +27,10 @@ a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
 .serif{font-family:var(--serif);font-weight:400}
 .wrap{width:min(92vw,1240px);margin-inline:auto}
-.over{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.over{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;display:inline-flex;align-items:baseline}
+.over .no{font-family:var(--serif);font-weight:400;font-size:2.1em;line-height:1;letter-spacing:0;margin-right:14px;
+  color:var(--gold);opacity:.92;transform:translateY(.12em)}
+.over .no::after{content:"";display:inline-block;width:26px;height:1px;background:currentColor;opacity:.5;margin:0 0 .28em 12px;vertical-align:middle}
 .reveal{opacity:0;transform:translateY(34px)}
 .btn{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;
   text-transform:uppercase;font-weight:600;padding:14px 26px;border-radius:100px;transition:.35s var(--ease)}
@@ -593,6 +596,12 @@ const ctaCard=k=>`<div class="cta-card"><img src="${IMG[k]||''}" alt="" loading=
 document.getElementById('ctaTop').innerHTML=(CTAIMG.map(ctaCard).join(''))+(CTAIMG.map(ctaCard).join(''));
 const ctaB=[...CTAIMG].reverse();
 document.getElementById('ctaBot').innerHTML=(ctaB.map(ctaCard).join(''))+(ctaB.map(ctaCard).join(''));
+
+/* editorial chapter numbers (touch borrowed from the social campaign board) */
+[["story","01"],["products","02"],["operations","03"],["sustainability","04"],["brands","05"],["depots","06"]].forEach(([id,n])=>{
+  const sec=document.getElementById(id); if(!sec)return;
+  const over=sec.querySelector('.over'); if(over&&!over.querySelector('.no')) over.insertAdjacentHTML('afterbegin',`<span class="no">${n}</span>`);
+});
 
 /* clocks */
 function clocks(){document.querySelectorAll('.clk').forEach(c=>{try{c.textContent=new Intl.DateTimeFormat('en-AU',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:c.dataset.tz}).format(new Date()).toUpperCase();}catch(e){}});}
