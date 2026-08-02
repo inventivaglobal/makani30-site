@@ -5287,5 +5287,56 @@
       }());
     </script>
   </div>
+
+<style id="draft-protect">
+img,video{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
+body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+input,textarea,[contenteditable]{-webkit-user-select:text!important;user-select:text!important}
+.draft-wm{position:absolute;right:12px;bottom:12px;z-index:9;pointer-events:none;
+  font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(13px,1.4vw,24px);
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);line-height:1;
+  white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.22)}
+.draft-wm.big{font-size:clamp(20px,2.4vw,42px);right:22px;bottom:20px;color:rgba(255,255,255,.22)}
+.draft-cover{position:absolute;inset:0;z-index:10;background:transparent;pointer-events:none}
+</style>
+
+<script id="draft-js">
+(function(){
+  ['contextmenu','dragstart'].forEach(function(ev){document.addEventListener(ev,function(e){e.preventDefault();},{capture:true});});
+  window.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u')){e.preventDefault();}},{capture:true});
+  function tag(){
+    document.querySelectorAll('img,video').forEach(function(m){
+      if(m.dataset.dft) return;
+      if(m.tagName==='IMG'){
+        var src=m.getAttribute('src')||m.currentSrc||'';
+        if(/logo|icon|\.svg/i.test(src)) return;
+        var r=m.getBoundingClientRect(); if(r.width && r.width<170) return;
+      }
+      m.dataset.dft='1';
+      var big=m.tagName!=='IMG';
+      var host=m.parentElement; if(!host) return;
+      if(getComputedStyle(host).position==='static') host.style.position='relative';
+      if(!host.querySelector(':scope > .draft-wm')){
+        var wm=document.createElement('span'); wm.className='draft-wm'+(big?' big':''); wm.textContent='DRAFT ONLY';
+        host.appendChild(wm);
+      }
+      if(m.tagName==='IMG' && !host.querySelector(':scope > .draft-cover')){
+        var cv=document.createElement('span'); cv.className='draft-cover'; host.appendChild(cv);
+      }
+    });
+    document.querySelectorAll('video').forEach(function(v){
+      if(v.dataset.hard) return; v.dataset.hard='1';
+      v.setAttribute('controlslist','nodownload noremoteplayback noplaybackrate');
+      v.setAttribute('disablepictureinpicture','');
+      v.oncontextmenu=function(){return false;};
+    });
+  }
+  var run=function(){tag();};
+  if(document.readyState!=='loading') run(); else document.addEventListener('DOMContentLoaded',run);
+  var t; window.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(tag,150);},{passive:true});
+  [1500,3500,6000].forEach(function(ms){setTimeout(tag,ms);});
+})();
+</script>
+
 </body>
 </html>
