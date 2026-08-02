@@ -301,10 +301,29 @@ body.cursor-on .cursor-ring,body.cursor-on .cursor-dot{opacity:1}
 body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98,.14);border-color:transparent}
 @media(hover:none){.cursor-ring,.cursor-dot{display:none}}
 
+/* then & now compare slider (device borrowed from the social campaign board) */
+.thennow{background:var(--ink-2)}
+.compare{position:relative;width:min(92vw,1240px);margin:46px auto 0;aspect-ratio:16/9;
+  border-radius:10px;overflow:hidden;--pos:55%;cursor:ew-resize;touch-action:none;box-shadow:var(--shadow,0 30px 80px rgba(0,0,0,.4))}
+.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmp-reveal{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0);will-change:clip-path}
+.cmp-divider{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--gold);z-index:5;pointer-events:none}
+.cmp-handle{position:absolute;top:50%;left:var(--pos);transform:translate(-50%,-50%);z-index:6;pointer-events:none;
+  width:54px;height:54px;border-radius:50%;background:rgba(20,17,16,.5);backdrop-filter:blur(6px);
+  border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-size:20px}
+.cmp-label{position:absolute;bottom:18px;z-index:4;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:#fff;background:rgba(20,17,16,.5);padding:7px 12px;border-radius:4px;pointer-events:none;backdrop-filter:blur(4px)}
+.cmp-label.l{left:18px}.cmp-label.r{right:18px}
+.cmp-hint{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:4;font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(255,255,255,.7);pointer-events:none;animation:cmpPulse 2.4s ease-in-out infinite}
+@keyframes cmpPulse{0%,100%{opacity:.4}50%{opacity:.9}}
+.compare .draft-cover{pointer-events:none}
+
 @media(max-width:900px){
   header nav{display:none}
   .brand-card{width:150px;height:92px;padding:18px}
   .watermark{height:22vw}
+  .compare{aspect-ratio:4/5}
   .tl-row{grid-template-columns:80px 1fr;gap:16px}.tl-img{display:none}
   .ops .grid,.dep .grid,footer .top{grid-template-columns:1fr;gap:34px}
   .ops .visual{height:340px}.dep .team{height:360px}
@@ -414,6 +433,24 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
       <img data-img="a-quote-img-1" src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'/%3E" alt="Variety of premium raw Black Angus steaks">
       <img data-img="a-quote-img-2" src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'/%3E" alt="Premium marbled Australian beef">
     </div>
+  </div>
+</section>
+
+<!-- THEN & NOW -->
+<section class="blk thennow" id="thennow" data-scr="Then and Now">
+  <div class="wrap sec-head reveal" style="margin-bottom:0">
+    <div class="over">Then &amp; Now</div>
+    <h2 class="serif" style="font-size:clamp(34px,5vw,62px);margin-top:14px">1996 to 2026.<br>The same promise, a wider reach.</h2>
+    <p class="lede">Drag across to travel from the paddock where it began to the operation that feeds Australia today.</p>
+  </div>
+  <div class="compare reveal" style="--pos:55%">
+    <img class="cmp-base" data-img="a-story-today" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="2026 — the Makani fleet, nationwide today">
+    <div class="cmp-reveal"><img data-img="a-hero-drone" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="1996 — the paddock where it began"></div>
+    <div class="cmp-divider"></div>
+    <div class="cmp-handle">&#8596;</div>
+    <span class="cmp-hint">Drag</span>
+    <span class="cmp-label l">1996 · The paddock</span>
+    <span class="cmp-label r">2026 · Nationwide</span>
   </div>
 </section>
 
@@ -760,6 +797,15 @@ function draftTag(){
 draftTag();
 let _dt; addEventListener('scroll',()=>{clearTimeout(_dt);_dt=setTimeout(draftTag,140);},{passive:true});
 setTimeout(draftTag,1600); setTimeout(draftTag,4000);
+
+/* ---------- Then & Now: drag-to-reveal compare ---------- */
+document.querySelectorAll('.compare').forEach(c=>{
+  const set=x=>{const r=c.getBoundingClientRect();let p=(x-r.left)/r.width*100;p=Math.max(2,Math.min(98,p));c.style.setProperty('--pos',p+'%');};
+  let down=false;
+  c.addEventListener('pointerdown',e=>{down=true;try{c.setPointerCapture(e.pointerId);}catch(_){}set(e.clientX);c.querySelector('.cmp-hint')&&(c.querySelector('.cmp-hint').style.opacity='0');});
+  c.addEventListener('pointermove',e=>{if(down)set(e.clientX);});
+  addEventListener('pointerup',()=>down=false);
+});
 </script>
 </body>
 </html>
