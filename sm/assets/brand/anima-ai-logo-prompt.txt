@@ -1,0 +1,23 @@
+ANIMA AI LOGO - GENERATION PROMPT
+
+Use case: logo-brand
+Asset type: reusable horizontal brand identity for a creative studio's in-house AI character and visual development model
+Primary request: Create a distinctive, premium minimalist logo for the name "ANIMA AI". The exact visible text must read ANIMA AI, correctly spelled, in uppercase. Pair the wordmark with a compact abstract emblem suggesting a human profile emerging from layered frames or a camera aperture, communicating character, motion, image and identity. The mark should feel intelligent, editorial and cinematic, suitable for high-end campaign presentations and production credits.
+Style/medium: flat vector-friendly logo design, crisp geometric construction, precise kerning, no texture, no 3D, no shadows
+Composition/framing: horizontal lockup, emblem on the left and ANIMA AI wordmark on the right, generous clear space, centered on canvas
+Color palette: warm gold #C79A62 and near-black #171715, with a bone-white optional detail
+Background: perfectly flat solid #00FF00 chroma-key background for clean background removal
+Text (verbatim): "ANIMA AI"
+Constraints: exact spelling; highly legible at small size; simple silhouette; professional technology brand; do not include a tagline
+Avoid: brains, circuit-board cliches, robots, detailed faces, infinity symbols, chat bubbles, sparkles, stock icons, mockups, watermark, extra text
+
+OUTPUTS
+
+anima-ai-logo.png
+Transparent reusable logo asset.
+
+anima-ai-logo-preview-white.png
+Logo presented on the campaign's bone-white background.
+
+anima-ai-logo-chroma.png
+Original generated chroma-key source.
