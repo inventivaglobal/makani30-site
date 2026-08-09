@@ -38,7 +38,7 @@ header p{color:var(--muted-2);max-width:680px;line-height:1.7;font-size:15px}
 .day-n{font-family:var(--serif);font-size:38px;color:var(--gold);line-height:1}
 .day-date{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
 .day-left{margin-left:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.posts{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding-bottom:34px}
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-bottom:34px}
 
 .post{background:var(--ink-2);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
 .post .media{position:relative;aspect-ratio:4/5;background:#0d0b0a;overflow:hidden}
@@ -59,6 +59,7 @@ header p{color:var(--muted-2);max-width:680px;line-height:1.7;font-size:15px}
 .copy:hover{background:var(--gold);color:var(--ink)}
 .copy.done{background:var(--gold);color:var(--ink)}
 footer{padding:50px 0 70px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:1200px){.posts{grid-template-columns:1fr 1fr}}
 @media(max-width:820px){.posts{grid-template-columns:1fr}}
 </style>
 </head>
@@ -67,12 +68,12 @@ footer{padding:50px 0 70px;color:var(--muted);font-size:12px;text-align:center}
 <header>
   <div class="wrap">
     <div class="over">Makani Meats · 30 Years · Internal Schedule</div>
-    <h1 class="serif">Daily post schedule.<br>Two a day, every day.</h1>
-    <p>Every post below uses genuine Makani material: real photography, real people, real fleet and real country. Captions are written and ready to publish. Copy any caption with one click.</p>
+    <h1 class="serif">Daily post schedule.<br>Monday to Friday, three a day.</h1>
+    <p>This week's posts. Every one uses genuine Makani material: real photography, real people, real fleet and real country. Captions are written and ready to publish. Copy any caption with one click.</p>
     <div class="meta">
       <div><b id="mPosts">0</b>Posts ready</div>
       <div><b id="mDays">0</b>Days covered</div>
-      <div><b>2</b>Per day</div>
+      <div><b>3</b>Per day</div>
       <div><b id="mVid">0</b>Video posts</div>
     </div>
   </div>
@@ -119,7 +120,7 @@ const VID={
   album:"../media/videos/the-album.mp4"
 };
 
-/* ---------- the schedule: 2 posts a day ---------- */
+/* ---------- the schedule: 3 posts a day, Mon to Fri ---------- */
 const TAGS={
   core:"#MakaniMeats #30Years #AustralianOwned #PaddockToPlate #AustralianBeef",
   prod:"#AustralianBeef #AustralianLamb #PremiumMeat #Butcher #FoodService #Wholesale",
@@ -127,34 +128,41 @@ const TAGS={
   people:"#OurTeam #FamilyOwned #BehindTheScenes #AustralianBusiness"
 };
 const P=[
-/* D1 */ [["Thirty years, one promise.","Since 1996 we have supplied Australia's finest meat.\n\nThirty years on, the promise has not changed: honest pricing, uncompromising quality, and 100% Australian ownership.\n\nHere is to the next thirty.",IMG.droneDam,"image","Heritage",TAGS.core],
-          ["Where every cut begins.","Before the depot, before the cold room, before the kitchen. It begins on Australian country, with cattle raised properly.\n\nThat is not marketing. That is the first step of every order we fill.",VID.paddock,"video","Country",TAGS.land]],
-/* D2 */ [["The standard, cut to order.","Beef, lamb and pork, prepared to your specification and delivered in optimal condition.\n\nThe preferred choice of Australia's major supermarket, food service and restaurant chains.",IMG.beef,"image","Product",TAGS.prod],
-          ["Four depots. One standard.","Sydney, Newcastle, Brisbane and Perth. Different postcodes, identical standard.\n\nNationwide reach, backed by an AUS-MEAT A+ rated plant.",IMG.fleetDepot,"image","Operations",TAGS.core]],
-/* D3 */ [["The people behind the promise.","Thirty years is not built by a logo. It is built by the people who show up before dawn, every day, and do it properly.\n\nThis is the team that keeps the promise.",IMG.team,"image","People",TAGS.people],
-          ["First light on the country.","The quiet hours nobody sees. This is where the standard is set.",VID.mornings,"video","Country",TAGS.land]],
-/* D4 */ [["Certified organic. Farmed for the next thirty.","Australian Certified Organic beef, sustainably farmed and certified for flavour and provenance.\n\nWe farm for the next thirty years, not just this season.",IMG.organic,"image","Sustainability",TAGS.land],
-          ["Lamb, done properly.","Certified for flavour, juiciness and tenderness. Visual appeal and texture considered at every step.",IMG.lamb,"image","Product",TAGS.prod]],
-/* D5 */ [["From our paddocks to your door.","Vertical integration means we purchase, process, warehouse and distribute our own meat.\n\nComplete control over quality, quantity and consistency. Every single time.",IMG.truck,"image","Operations",TAGS.core],
-          ["Thirty years, from paddock to plate.","A short film, cut entirely from our own country, our own people and our own fleet.\n\nThirty years in ninety seconds.",VID.film30,"video","Film",TAGS.core]],
-/* D6 */ [["Black Angus, Australian raised.","Grass fed on Australian country, graded and selected for the standard our customers expect.",IMG.steers,"image","Product",TAGS.prod],
-          ["Care begins at the roots.","Regeneration of our pastures. Erosion control and land improvement. Protection of native wildlife.\n\nA company of conscience, since 1996.",VID.country,"video","Sustainability",TAGS.land]],
-/* D7 */ [["The pricing promise.","Our reputation for guaranteeing value for money is recognised throughout Australia.\n\nWe set our base margin, and only ever move with the market. That has not changed in thirty years.",IMG.marbled,"image","Heritage",TAGS.core],
-          ["Sunday on the country.","No noise. No staging. Just Australian country doing what it does best.",IMG.panorama,"image","Country",TAGS.land]],
-/* D8 */ [["Inside the plant.","Nationally accredited, AUS-MEAT A+ rated. The cutting edge of food safety.\n\nCompliant with all NSW Meat Industry Authority standards.",IMG.facility,"image","Operations",TAGS.core],
-          ["Value added, kitchen ready.","A wide variety of smallgoods and value added products for food service and retail clients.",IMG.patties,"image","Product",TAGS.prod]],
-/* D9 */ [["Cattle in the mist.","Southern Highlands country. This is where the standard starts.",IMG.mist,"image","Country",TAGS.land],
-          ["Meet the herd.","Thirty years of knowing exactly where it comes from.",VID.herd,"video","Country",TAGS.land]],
-/* D10 */[["Pork, maintained in optimal conditions.","Premium Australian pork, held in optimal conditions from plant to delivery. No compromise in the cold chain.",IMG.pork,"image","Product",TAGS.prod],
-          ["Thirty years in the trade.","1996 to 2026. Still 100% Australian owned. Still family run. Still answering the phone.",IMG.dronePasture,"image","Heritage",TAGS.core]],
-/* D11 */[["The journey, side by side.","The same promise, a wider reach. From one paddock to four depots nationally.",VID.journey,"video","Heritage",TAGS.core],
-          ["Grass fed, Southern Ranges.","Selected for flavour and consistency, from country we know and trust.",IMG.grassFed,"image","Product",TAGS.prod]],
-/* D12 */[["Every cut, to order.","Variety, consistency and provenance. Cut to your specification, delivered on time.",IMG.steaks,"image","Product",TAGS.prod],
-          ["The album.","Thirty years of stories, cuts and characters. A short film for the milestone.",VID.album,"video","Film",TAGS.core]],
-/* D13 */[["Before the sun.","The hours nobody saw built the thirty years everybody sees.",VID.quiet,"video","Heritage",TAGS.core],
-          ["Our team, our standard.","Outside the depot, before the run. The people who make the promise real.",IMG.teamDepot,"image","People",TAGS.people]],
-/* D14 */[["A morning worth thirty years.","Summer morning on the pasture. This is the Australia we feed.",IMG.morning,"image","Country",TAGS.land],
-          ["Here is to the next thirty.","Thank you to every customer, supplier and team member who built the last thirty years with us.\n\nThe promise continues.",IMG.depot,"image","Heritage",TAGS.core]]
+/* MON */ [["Thirty years, one promise.","Since 1996 we have supplied Australia's finest meat.
+
+Thirty years on, the promise has not changed: honest pricing, uncompromising quality, and 100% Australian ownership.
+
+Here is to the next thirty.",IMG.droneDam,"image","Heritage",TAGS.core],
+           ["Where every cut begins.","Before the depot, before the cold room, before the kitchen. It begins on Australian country, with cattle raised properly.
+
+That is not marketing. That is the first step of every order we fill.",VID.paddock,"video","Country",TAGS.land],
+           ["Cut to your specification.","Beef, lamb and pork, prepared exactly how you need it and delivered in optimal condition.
+
+One standard, whatever the order.",IMG.steaks,"image","Product",TAGS.prod]],
+/* TUE */ [["The standard, cut to order.","The preferred choice of Australia's major supermarket, food service and restaurant chains.
+
+Thirty years of getting it right, order after order.",IMG.beef,"image","Product",TAGS.prod],
+           ["Four depots. One standard.","Sydney, Newcastle, Brisbane and Perth. Different postcodes, identical standard.
+
+Nationwide reach, backed by an AUS-MEAT A+ rated plant.",IMG.fleetDepot,"image","Operations",TAGS.core],
+           ["Southern Highlands mornings.","Cattle in the mist, on country we know. This is where the standard starts, long before anyone sees a cut.",IMG.mist,"image","Country",TAGS.land]],
+/* WED */ [["The people behind the promise.","Thirty years is not built by a logo. It is built by the people who show up before dawn, every day, and do it properly.
+
+This is the team that keeps the promise.",IMG.team,"image","People",TAGS.people],
+           ["First light on the country.","The quiet hours nobody sees. This is where the standard is set.",VID.mornings,"video","Country",TAGS.land],
+           ["The marbling tells the story.","You cannot fake provenance. Thirty years of knowing our supply chain, end to end, shows up in the product.",IMG.marbled,"image","Product",TAGS.prod]],
+/* THU */ [["Certified organic. Farmed for the next thirty.","Australian Certified Organic beef, sustainably farmed and certified for flavour and provenance.
+
+We farm for the next thirty years, not just this season.",IMG.organic,"image","Sustainability",TAGS.land],
+           ["Lamb, done properly.","Certified for flavour, juiciness and tenderness. Visual appeal and texture considered at every step.",IMG.lamb,"image","Product",TAGS.prod],
+           ["Inside an A+ rated plant.","Nationally accredited, AUS-MEAT A+ rated. The cutting edge of food safety, compliant with all NSW Meat Industry Authority standards.",IMG.facility,"image","Operations",TAGS.core]],
+/* FRI */ [["From our paddocks to your door.","Vertical integration means we purchase, process, warehouse and distribute our own meat.
+
+Complete control over quality, quantity and consistency. Every single time.",IMG.truck,"image","Operations",TAGS.core],
+           ["Thirty years, and counting.","1996 to 2026. Still 100% Australian owned. Still family run. Still answering the phone.",IMG.dronePasture,"image","Heritage",TAGS.core],
+           ["Thirty years, from paddock to plate.","A short film, cut entirely from our own country, our own people and our own fleet.
+
+Thank you to everyone who built the last thirty years with us. Here is to the next thirty.",VID.film30,"video","Film",TAGS.core]]
 ];
 
 /* ---------- build ---------- */
@@ -173,7 +181,7 @@ P.forEach((day,i)=>{
   day.forEach((p,j)=>{
     const [hook,cap,src,type,cat,tags]=p;
     cats.add(cat); nPosts++; if(type==='video')nVid++;
-    const slot=j===0?'9:00 AM':'4:30 PM';
+    const slot=['7:00 AM','12:30 PM','5:30 PM'][j]||'';
     const media = type==='video'
       ? `<video src="${src}" muted loop playsinline preload="metadata" onmouseover="this.play()" onmouseout="this.pause()"></video>`
       : `<img src="${src}" alt="" loading="lazy">`;
