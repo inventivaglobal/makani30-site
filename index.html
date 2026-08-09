@@ -740,22 +740,26 @@ function start(){
   /* HERO scrub */
   const heroFrame={f:0};
   gsap.to(heroFrame,{f:FRAMES-1,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.5},onUpdate:()=>drawFrame(heroFrame.f)});
-  /* hero text choreography across the pin */
-  const ht=gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.6}});
-  ht.from('[data-h=est]',{opacity:0,y:20,duration:.4})
-    .from('[data-h=l1]',{opacity:0,y:40,duration:.6},'-=.1')
-    .from('[data-h=l2]',{opacity:0,y:40,duration:.6},'-=.4')
-    .from('[data-h=sub]',{opacity:0,y:26,duration:.5},'-=.3')
-    .from('[data-h=cta]',{opacity:0,y:20,duration:.5},'-=.3')
-    .to('.hero-content',{opacity:0,y:-40,duration:.6},.72)
-    .to('.hero-stat',{opacity:0,duration:.4},'<')
-    .to('.scrollcue',{opacity:0,duration:.2},.2);
+  /* hero intro: plays on load so the hero is FULL on arrival (not blank until scroll) */
+  gsap.timeline({delay:.25})
+    .from('[data-h=est]',{opacity:0,y:20,duration:.7,ease:'power3.out'})
+    .from('[data-h=l1]',{opacity:0,y:42,duration:.95,ease:'power3.out'},'-=.45')
+    .from('[data-h=l2]',{opacity:0,y:42,duration:.95,ease:'power3.out'},'-=.72')
+    .from('[data-h=sub]',{opacity:0,y:26,duration:.8,ease:'power3.out'},'-=.62')
+    .from('[data-h=cta]',{opacity:0,y:20,duration:.8,ease:'power3.out'},'-=.6')
+    .from('.hero-stat > div',{opacity:0,y:18,duration:.7,stagger:.12,ease:'power3.out'},'-=.55');
+
+  /* hero exit: scrubbed across the pin */
+  gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.6}})
+    .to('.scrollcue',{opacity:0,duration:.15},.05)
+    .to('.hero-content',{opacity:0,y:-40,duration:.35},.62)
+    .to('.hero-stat',{opacity:0,duration:.3},.62);
   gsap.to('#ghostYears',{y:-120,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
 
   /* count-up hero stats */
   document.querySelectorAll('[data-count]').forEach(n=>{
     const to=+n.dataset.count;
-    ScrollTrigger.create({trigger:n,start:'top 90%',once:true,onEnter:()=>{
+    ScrollTrigger.create({trigger:n,start:'top bottom',once:true,onEnter:()=>{
       gsap.to({v:0},{v:to,duration:1.4,ease:'power2.out',onUpdate:function(){n.textContent=Math.round(this.targets()[0].v);}});
     }});
   });
