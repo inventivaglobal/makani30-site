@@ -127,43 +127,7 @@ const TAGS={
   land:"#Sustainability #CertifiedOrganic #AustralianFarming #BlackAngus #Regenerative",
   people:"#OurTeam #FamilyOwned #BehindTheScenes #AustralianBusiness"
 };
-const P=[
-/* MON */ [["Thirty years, one promise.","Since 1996 we have supplied Australia's finest meat.
-
-Thirty years on, the promise has not changed: honest pricing, uncompromising quality, and 100% Australian ownership.
-
-Here is to the next thirty.",IMG.droneDam,"image","Heritage",TAGS.core],
-           ["Where every cut begins.","Before the depot, before the cold room, before the kitchen. It begins on Australian country, with cattle raised properly.
-
-That is not marketing. That is the first step of every order we fill.",VID.paddock,"video","Country",TAGS.land],
-           ["Cut to your specification.","Beef, lamb and pork, prepared exactly how you need it and delivered in optimal condition.
-
-One standard, whatever the order.",IMG.steaks,"image","Product",TAGS.prod]],
-/* TUE */ [["The standard, cut to order.","The preferred choice of Australia's major supermarket, food service and restaurant chains.
-
-Thirty years of getting it right, order after order.",IMG.beef,"image","Product",TAGS.prod],
-           ["Four depots. One standard.","Sydney, Newcastle, Brisbane and Perth. Different postcodes, identical standard.
-
-Nationwide reach, backed by an AUS-MEAT A+ rated plant.",IMG.fleetDepot,"image","Operations",TAGS.core],
-           ["Southern Highlands mornings.","Cattle in the mist, on country we know. This is where the standard starts, long before anyone sees a cut.",IMG.mist,"image","Country",TAGS.land]],
-/* WED */ [["The people behind the promise.","Thirty years is not built by a logo. It is built by the people who show up before dawn, every day, and do it properly.
-
-This is the team that keeps the promise.",IMG.team,"image","People",TAGS.people],
-           ["First light on the country.","The quiet hours nobody sees. This is where the standard is set.",VID.mornings,"video","Country",TAGS.land],
-           ["The marbling tells the story.","You cannot fake provenance. Thirty years of knowing our supply chain, end to end, shows up in the product.",IMG.marbled,"image","Product",TAGS.prod]],
-/* THU */ [["Certified organic. Farmed for the next thirty.","Australian Certified Organic beef, sustainably farmed and certified for flavour and provenance.
-
-We farm for the next thirty years, not just this season.",IMG.organic,"image","Sustainability",TAGS.land],
-           ["Lamb, done properly.","Certified for flavour, juiciness and tenderness. Visual appeal and texture considered at every step.",IMG.lamb,"image","Product",TAGS.prod],
-           ["Inside an A+ rated plant.","Nationally accredited, AUS-MEAT A+ rated. The cutting edge of food safety, compliant with all NSW Meat Industry Authority standards.",IMG.facility,"image","Operations",TAGS.core]],
-/* FRI */ [["From our paddocks to your door.","Vertical integration means we purchase, process, warehouse and distribute our own meat.
-
-Complete control over quality, quantity and consistency. Every single time.",IMG.truck,"image","Operations",TAGS.core],
-           ["Thirty years, and counting.","1996 to 2026. Still 100% Australian owned. Still family run. Still answering the phone.",IMG.dronePasture,"image","Heritage",TAGS.core],
-           ["Thirty years, from paddock to plate.","A short film, cut entirely from our own country, our own people and our own fleet.
-
-Thank you to everyone who built the last thirty years with us. Here is to the next thirty.",VID.film30,"video","Film",TAGS.core]]
-];
+const P=[[["Thirty years, one promise.", "Since 1996 we have supplied Australia's finest meat.\n\nThirty years on, the promise has not changed: honest pricing, uncompromising quality, and 100% Australian ownership.\n\nHere is to the next thirty.", "droneDam", "image", "Heritage", "core"], ["Where every cut begins.", "Before the depot, before the cold room, before the kitchen. It begins on Australian country, with cattle raised properly.\n\nThat is not marketing. That is the first step of every order we fill.", "paddock", "video", "Country", "land"], ["Cut to your specification.", "Beef, lamb and pork, prepared exactly how you need it and delivered in optimal condition.\n\nOne standard, whatever the order.", "steaks", "image", "Product", "prod"]], [["The standard, cut to order.", "The preferred choice of Australia's major supermarket, food service and restaurant chains.\n\nThirty years of getting it right, order after order.", "beef", "image", "Product", "prod"], ["Four depots. One standard.", "Sydney, Newcastle, Brisbane and Perth. Different postcodes, identical standard.\n\nNationwide reach, backed by an AUS-MEAT A+ rated plant.", "fleetDepot", "image", "Operations", "core"], ["Southern Highlands mornings.", "Cattle in the mist, on country we know. This is where the standard starts, long before anyone sees a cut.", "mist", "image", "Country", "land"]], [["The people behind the promise.", "Thirty years is not built by a logo. It is built by the people who show up before dawn, every day, and do it properly.\n\nThis is the team that keeps the promise.", "team", "image", "People", "people"], ["First light on the country.", "The quiet hours nobody sees. This is where the standard is set.", "mornings", "video", "Country", "land"], ["The marbling tells the story.", "You cannot fake provenance. Thirty years of knowing our supply chain, end to end, shows up in the product.", "marbled", "image", "Product", "prod"]], [["Certified organic. Farmed for the next thirty.", "Australian Certified Organic beef, sustainably farmed and certified for flavour and provenance.\n\nWe farm for the next thirty years, not just this season.", "organic", "image", "Sustainability", "land"], ["Lamb, done properly.", "Certified for flavour, juiciness and tenderness. Visual appeal and texture considered at every step.", "lamb", "image", "Product", "prod"], ["Inside an A+ rated plant.", "Nationally accredited, AUS-MEAT A+ rated. The cutting edge of food safety, compliant with all NSW Meat Industry Authority standards.", "facility", "image", "Operations", "core"]], [["From our paddocks to your door.", "Vertical integration means we purchase, process, warehouse and distribute our own meat.\n\nComplete control over quality, quantity and consistency. Every single time.", "truck", "image", "Operations", "core"], ["Thirty years, and counting.", "1996 to 2026. Still 100% Australian owned. Still family run. Still answering the phone.", "dronePasture", "image", "Heritage", "core"], ["Thirty years, from paddock to plate.", "A short film, cut entirely from our own country, our own people and our own fleet.\n\nThank you to everyone who built the last thirty years with us. Here is to the next thirty.", "film30", "video", "Film", "core"]]];
 
 /* ---------- build ---------- */
 const feed=document.getElementById('feed');
@@ -179,7 +143,9 @@ P.forEach((day,i)=>{
     <div class="posts"></div>`;
   const grid=sec.querySelector('.posts');
   day.forEach((p,j)=>{
-    const [hook,cap,src,type,cat,tags]=p;
+    const [hook,cap,key,type,cat,tagKey]=p;
+    const src=(type==='video'?VID:IMG)[key]||'';
+    const tags=TAGS[tagKey]||'';
     cats.add(cat); nPosts++; if(type==='video')nVid++;
     const slot=['7:00 AM','12:30 PM','5:30 PM'][j]||'';
     const media = type==='video'
