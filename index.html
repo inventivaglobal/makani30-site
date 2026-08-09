@@ -301,6 +301,35 @@ body.cursor-on .cursor-ring,body.cursor-on .cursor-dot{opacity:1}
 body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98,.14);border-color:transparent}
 @media(hover:none){.cursor-ring,.cursor-dot{display:none}}
 
+/* --- light-pass gleam across the hero (device from the social campaign board) --- */
+.hero-content::after{content:"";position:absolute;top:-15%;bottom:-15%;left:0;width:34%;
+  background:linear-gradient(90deg,transparent,rgba(255,239,199,.22),transparent);
+  transform:translateX(-180%) rotate(8deg);mix-blend-mode:screen;pointer-events:none;z-index:3;
+  animation:h30-light-pass 9s ease-in-out infinite}
+@keyframes h30-light-pass{
+  0%,50%{transform:translateX(-180%) rotate(8deg);opacity:0}
+  58%{opacity:1}
+  82%,100%{transform:translateX(390%) rotate(8deg);opacity:0}
+}
+
+/* --- card shimmer on hover (device from the social campaign board) --- */
+.brand-card,.cta-card{position:relative;overflow:hidden}
+.card .ph::before,.cta-card::before,.brand-card::before{content:"";position:absolute;z-index:2;
+  top:0;bottom:0;left:0;width:42%;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.20),transparent);
+  transform:translateX(-140%) skewX(-12deg)}
+.brand-card::before{background:linear-gradient(90deg,transparent,rgba(199,154,98,.28),transparent)}
+.card:hover .ph::before,.cta-card:hover::before,.brand-card:hover::before{
+  opacity:1;animation:h30-shimmer 1.05s ease-out}
+@keyframes h30-shimmer{
+  from{transform:translateX(-140%) skewX(-12deg)}
+  to{transform:translateX(360%) skewX(-12deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-content::after{animation:none;opacity:0}
+  .card .ph::before,.cta-card::before,.brand-card::before{display:none}
+}
+
 /* then & now compare slider (device borrowed from the social campaign board) */
 .thennow{background:var(--ink-2)}
 .compare{position:relative;width:min(92vw,1240px);margin:46px auto 0;aspect-ratio:16/9;
