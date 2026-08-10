@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="googlebot" content="noindex, nofollow">
-<title>Makani 30 | Daily Post Schedule</title>
+<title>Makani Meats | Weekly Content Schedule</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -67,9 +67,9 @@ footer{padding:50px 0 70px;color:var(--muted);font-size:12px;text-align:center}
 
 <header>
   <div class="wrap">
-    <div class="over">Makani Meats · 30 Years · Internal Schedule</div>
-    <h1 class="serif">Daily post schedule.<br>Monday to Friday, three a day.</h1>
-    <p>This week's posts. Every one uses genuine Makani material: real photography, real people, real fleet and real country. Captions are written and ready to publish. Copy any caption with one click.</p>
+    <div class="over">Makani Meats · Weekly Content · Internal Schedule</div>
+    <h1 class="serif">This week's content.<br>Monday to Friday, three a day.</h1>
+    <p>Regular business content for the week ahead. Trade focused, useful to butchers, chefs and food service buyers, and written to sell. Every post uses genuine Makani material. Copy any caption with one click.<br><br><strong style="color:#C79A62">The 30 Year anniversary campaign begins Saturday 8 August.</strong></p>
     <div class="meta">
       <div><b id="mPosts">0</b>Posts ready</div>
       <div><b id="mDays">0</b>Days covered</div>
@@ -122,12 +122,16 @@ const VID={
 
 /* ---------- the schedule: 3 posts a day, Mon to Fri ---------- */
 const TAGS={
-  core:"#MakaniMeats #30Years #AustralianOwned #PaddockToPlate #AustralianBeef",
-  prod:"#AustralianBeef #AustralianLamb #PremiumMeat #Butcher #FoodService #Wholesale",
-  land:"#Sustainability #CertifiedOrganic #AustralianFarming #BlackAngus #Regenerative",
-  people:"#OurTeam #FamilyOwned #BehindTheScenes #AustralianBusiness"
+  serv:"#MakaniMeats #AustralianMeat #Wholesale #FoodService #Butcher #MeatDelivery",
+  prod:"#AustralianBeef #AustralianLamb #AustralianPork #PremiumMeat #Butcher #FoodService",
+  prov:"#Provenance #AustralianFarming #GrassFed #BlackAngus #PaddockToPlate",
+  ops:"#ColdChain #FoodSafety #AusMeat #QualityControl #MeatIndustry",
+  tips:"#ButcherTips #SlowCooked #WinterCooking #MeatCuts #ChefLife",
+  ppl:"#OurTeam #AustralianBusiness #BehindTheScenes #FamilyOwned",
+  sus:"#Sustainability #CertifiedOrganic #RegenerativeFarming #AustralianFarming",
+  brand:"#MakaniMeats #AustraliasFinestMeat #AustralianOwned #Wholesale"
 };
-const P=[[["Thirty years, one promise.", "Since 1996 we have supplied Australia's finest meat.\n\nThirty years on, the promise has not changed: honest pricing, uncompromising quality, and 100% Australian ownership.\n\nHere is to the next thirty.", "droneDam", "image", "Heritage", "core"], ["Where every cut begins.", "Before the depot, before the cold room, before the kitchen. It begins on Australian country, with cattle raised properly.\n\nThat is not marketing. That is the first step of every order we fill.", "paddock", "video", "Country", "land"], ["Cut to your specification.", "Beef, lamb and pork, prepared exactly how you need it and delivered in optimal condition.\n\nOne standard, whatever the order.", "steaks", "image", "Product", "prod"]], [["The standard, cut to order.", "The preferred choice of Australia's major supermarket, food service and restaurant chains.\n\nThirty years of getting it right, order after order.", "beef", "image", "Product", "prod"], ["Four depots. One standard.", "Sydney, Newcastle, Brisbane and Perth. Different postcodes, identical standard.\n\nNationwide reach, backed by an AUS-MEAT A+ rated plant.", "fleetDepot", "image", "Operations", "core"], ["Southern Highlands mornings.", "Cattle in the mist, on country we know. This is where the standard starts, long before anyone sees a cut.", "mist", "image", "Country", "land"]], [["The people behind the promise.", "Thirty years is not built by a logo. It is built by the people who show up before dawn, every day, and do it properly.\n\nThis is the team that keeps the promise.", "team", "image", "People", "people"], ["First light on the country.", "The quiet hours nobody sees. This is where the standard is set.", "mornings", "video", "Country", "land"], ["The marbling tells the story.", "You cannot fake provenance. Thirty years of knowing our supply chain, end to end, shows up in the product.", "marbled", "image", "Product", "prod"]], [["Certified organic. Farmed for the next thirty.", "Australian Certified Organic beef, sustainably farmed and certified for flavour and provenance.\n\nWe farm for the next thirty years, not just this season.", "organic", "image", "Sustainability", "land"], ["Lamb, done properly.", "Certified for flavour, juiciness and tenderness. Visual appeal and texture considered at every step.", "lamb", "image", "Product", "prod"], ["Inside an A+ rated plant.", "Nationally accredited, AUS-MEAT A+ rated. The cutting edge of food safety, compliant with all NSW Meat Industry Authority standards.", "facility", "image", "Operations", "core"]], [["From our paddocks to your door.", "Vertical integration means we purchase, process, warehouse and distribute our own meat.\n\nComplete control over quality, quantity and consistency. Every single time.", "truck", "image", "Operations", "core"], ["Thirty years, and counting.", "1996 to 2026. Still 100% Australian owned. Still family run. Still answering the phone.", "dronePasture", "image", "Heritage", "core"], ["Thirty years, from paddock to plate.", "A short film, cut entirely from our own country, our own people and our own fleet.\n\nThank you to everyone who built the last thirty years with us. Here is to the next thirty.", "film30", "video", "Film", "core"]]];
+const P=[[["Fresh week, fresh orders.", "The week starts here. Beef, lamb and pork cut to your specification and out on the road the same day.\n\nOrders in by 2pm for next day delivery across our depot network. Speak to your rep or request a price list.", "fleetDepot", "image", "Service", "serv"], ["Grain fed, grass finished, properly graded.", "Every carcase is selected and graded before it earns a place on the truck. Consistency is not luck, it is process.\n\nMSA graded. AUS-MEAT accredited.", "beef", "image", "Product", "prod"], ["Where it comes from matters.", "Sourced direct from Australian farms we know and have worked with for years.\n\nProvenance you can actually trace, not just claim.", "mist", "image", "Provenance", "prov"]], [["Lamb, cut for the trade.", "Racks, cutlets, shoulders and legs. Prepared to your spec, presented the way your customers expect to see it.\n\nCertified for flavour, juiciness and tenderness.", "lamb", "image", "Product", "prod"], ["Inside the plant.", "Nationally accredited and AUS-MEAT A plus rated. Every batch handled under full compliance with NSW Meat Industry Authority standards.\n\nQuality control is not a department here, it is the whole process.", "facility", "image", "Operations", "ops"], ["Winter cuts worth knowing.", "Late winter is prime time for the hard working cuts. Chuck, brisket, shin and shoulder reward slow heat and time.\n\nTalk to us about bulk pricing on braising cuts while the weather holds.", "marbled", "image", "Trade Tips", "tips"]], [["The team behind the order.", "Behind every delivery is a group of people who know your business, your cuts and your run sheet.\n\nThat is the part you cannot automate.", "team", "image", "People", "ppl"], ["Pork, held in perfect condition.", "Premium Australian pork, maintained in optimal conditions from plant to delivery.\n\nCold chain integrity, start to finish.", "pork", "image", "Product", "prod"], ["The cold chain never breaks.", "Our own refrigerated fleet, our own drivers, our own schedule.\n\nWhen you control the whole chain, you can actually guarantee the condition it arrives in.", "truck", "image", "Operations", "ops"]], [["Certified organic, on request.", "Australian Certified Organic beef, available through our standard ordering process.\n\nAsk your rep about current availability and pricing.", "organic", "image", "Product", "prod"], ["Value added and kitchen ready.", "Patties, smallgoods and prepared lines for food service and retail. Consistent portion control, less prep time, less waste.", "patties", "image", "Product", "prod"], ["Country we look after.", "Regeneration of pastures, erosion control, protection of native wildlife.\n\nGood land management is not a campaign. It is just how the supply chain stays good.", "grassFed", "image", "Sustainability", "sus"]], [["Weekend trade starts now.", "Get your weekend orders in this morning. We will have it cut, packed and on the road today.\n\nCall your rep or request a price list.", "depot", "image", "Service", "serv"], ["The cuts your weekend customers want.", "Scotch, porterhouse, rump and eye fillet. Cut to your spec, presented for the counter.\n\nPremium Australian beef, ready for the busiest two days of your week.", "steaks", "image", "Product", "prod"], ["Have a good weekend.", "From all of us at Makani. Back on the road Monday morning.\n\nAustralia's finest meat, delivered.", "panorama", "image", "Brand", "brand"]]];
 
 /* ---------- build ---------- */
 const feed=document.getElementById('feed');
@@ -139,7 +143,7 @@ P.forEach((day,i)=>{
   const d=new Date(start); d.setDate(start.getDate()+i);
   const sec=document.createElement('section'); sec.className='day';
   sec.innerHTML=`<div class="day-head"><span class="day-n">${String(i+1).padStart(2,'0')}</span>
-    <span class="day-date">${fmt(d)}</span><span class="day-left">${45-i} days to the milestone</span></div>
+    <span class="day-date">${fmt(d)}</span><span class="day-left">Regular schedule</span></div>
     <div class="posts"></div>`;
   const grid=sec.querySelector('.posts');
   day.forEach((p,j)=>{
