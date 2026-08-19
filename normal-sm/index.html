@@ -69,7 +69,7 @@ footer{padding:50px 0 70px;color:var(--muted);font-size:12px;text-align:center}
   <div class="wrap">
     <div class="over">Makani Meats · Weekly Content · Internal Schedule</div>
     <h1 class="serif">This week's content.<br>Monday to Friday, three a day.</h1>
-    <p>Regular business content for the week ahead. Trade focused, useful to butchers, chefs and food service buyers, and written to sell. Every post uses genuine Makani material. Copy any caption with one click.<br><br><strong style="color:#C79A62">The 30 Year anniversary campaign begins Saturday 8 August.</strong></p>
+    <p>Regular business content for the week ahead. Trade focused, useful to butchers, chefs and food service buyers, and written to sell. Every post uses genuine Makani material. Copy any caption with one click.<br><br><strong style="color:#C79A62" id="campLine">The 30 Year anniversary campaign follows this week.</strong></p>
     <div class="meta">
       <div><b id="mPosts">0</b>Posts ready</div>
       <div><b id="mDays">0</b>Days covered</div>
@@ -148,7 +148,7 @@ const P=[[["Fresh week, fresh orders.", "The week starts here. Beef, lamb and po
 
 /* ---------- build ---------- */
 const feed=document.getElementById('feed');
-const start=new Date(2026,7,3); // Mon 3 Aug 2026
+const start=(()=>{const d=new Date();d.setHours(0,0,0,0);const w=d.getDay();d.setDate(d.getDate()+((w===1)?0:((8-w)%7||7)));return d;})();
 const fmt=d=>d.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
 let nPosts=0,nVid=0;
 const cats=new Set();
@@ -189,6 +189,10 @@ P.forEach((day,i)=>{
   });
   feed.appendChild(sec);
 });
+const _sat=new Date(start); _sat.setDate(start.getDate()+5);
+const _cl=document.getElementById('campLine');
+if(_cl) _cl.textContent='The 30 Year anniversary campaign begins '+
+  _sat.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'})+'.';
 document.getElementById('mPosts').textContent=nPosts;
 document.getElementById('mDays').textContent=P.length;
 document.getElementById('mVid').textContent=nVid;
