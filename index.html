@@ -302,10 +302,10 @@ footer .base img{height:34px;filter:brightness(0) invert(1);opacity:.85}
 .brand-track{display:flex;gap:18px;width:max-content;animation:mq 46s linear infinite}
 .brand-track.rev{animation-direction:reverse;animation-duration:52s}
 .brand-lane:hover .brand-track{animation-play-state:paused}
-.brand-card{flex:0 0 auto;width:210px;height:120px;background:var(--paper);border-radius:12px;
-  display:grid;place-items:center;padding:26px;transition:.4s var(--ease)}
+.brand-card{flex:0 0 auto;width:190px;aspect-ratio:1;height:auto;background:var(--paper);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;padding:22px;transition:.4s var(--ease)}
 .brand-card:hover{transform:translateY(-6px)}
-.brand-card img{max-width:100%;max-height:100%;object-fit:contain;filter:none}
+.brand-card img{display:block;width:100%;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;filter:none}
 
 /* cta scrolling cards */
 .cta-rows{display:flex;flex-direction:column;gap:16px;margin-top:64px}
@@ -403,7 +403,7 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
   .prod-scroll{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;-webkit-overflow-scrolling:touch}
   .prod-track{width:max-content;padding-inline:4vw}
   .card{scroll-snap-align:start;flex-basis:min(78vw,340px)}
-  .brand-card{width:150px;height:92px;padding:18px}
+  .brand-card{width:145px;aspect-ratio:1;height:auto;padding:16px}
   .watermark{height:22vw}
   .compare{aspect-ratio:4/5}
   .legacy-values{grid-template-columns:repeat(2,1fr);margin:34px 0 50px}
