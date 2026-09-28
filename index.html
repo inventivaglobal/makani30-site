@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Makani Meats — Thirty Years of Australia's Finest Meat</title>
 <meta name="description" content="Since 1996. Thirty years supplying Australia's finest meat, from paddock to plate. 100% Australian owned.">
+<meta name="theme-color" content="#141110">
+<link rel="canonical" href="https://www.makanimeats.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Makani Meats — Thirty Years of Australia's Finest Meat">
+<meta property="og:description" content="Proudly 100% Australian owned. Beef, lamb and pork from paddock to plate since 1996.">
+<meta property="og:url" content="https://www.makanimeats.com/">
+<meta property="og:image" content="https://www.makanimeats.com/wp-content/uploads/2026/07/h30-636eeceb-2022-08-kiama-panorama-cattle-2018-flat-.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -23,26 +30,14 @@ html{scroll-behavior:auto}
 body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
-/* --- copy deterrents (layer 1-4) --- */
-img,video{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
-img{pointer-events:none}
-body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-input,textarea{-webkit-user-select:text;user-select:text}
-/* DRAFT ONLY — 3-layer overlay (HTML only, never baked into the asset):
-   1) the media   2) watermark text (white, low opacity)   3) transparent cover on top */
-.draft-wrap{position:relative;display:inline-block;line-height:0}
-.draft-wm{position:absolute;right:12px;bottom:12px;z-index:2;pointer-events:none;
-  font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(13px,1.4vw,24px);
-  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);line-height:1;
-  white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.22)}
-.draft-wm.big{font-size:clamp(20px,2.4vw,42px);right:22px;bottom:20px;color:rgba(255,255,255,.22)}
-.draft-cover{position:absolute;inset:0;z-index:3;background:transparent}
-/* interactive UI must sit ABOVE the draft cover (play buttons, controls, CTAs, links) */
-.feat .inner,.play,.hero-content,.hero-stat,.scrollcue,.hero-cta,.lbl,.brands .sec-head,.dep .list,#vmodal{position:relative;z-index:20}
+.feat .inner,.play,.hero-content,.hero-stat,.scrollcue,.hero-cta,.lbl,.brands .sec-head,.dep .list,#vmodal{position:relative;z-index:2}
 #vmodal{z-index:9000}
 .play{cursor:pointer}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
+.skip-link{position:fixed;left:18px;top:12px;z-index:10000;background:var(--paper);color:var(--ink);padding:10px 16px;border-radius:999px;transform:translateY(-160%);transition:transform .2s}
+.skip-link:focus{transform:translateY(0)}
+:focus-visible{outline:2px solid var(--gold-lt);outline-offset:4px}
 .serif{font-family:var(--serif);font-weight:400}
 .wrap{width:min(92vw,1240px);margin-inline:auto}
 .over{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;display:inline-flex;align-items:baseline}
@@ -52,6 +47,7 @@ h1,h2,h3,p{margin:0}
 .reveal{opacity:0;transform:translateY(34px)}
 .btn{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;
   text-transform:uppercase;font-weight:600;padding:14px 26px;border-radius:100px;transition:.35s var(--ease)}
+button.btn{font-family:var(--sans);cursor:pointer;border:0}
 .btn-gold{background:var(--gold);color:var(--ink)}
 .btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--gold);color:var(--paper)}
@@ -80,11 +76,17 @@ header nav{display:flex;align-items:center;gap:30px}
 header nav a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--paper-2);opacity:.85;transition:.3s}
 header nav a:hover{opacity:1;color:var(--gold)}
 .progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);width:0;z-index:300}
-.menu-btn{display:none}
+.menu-btn{display:none;width:46px;height:46px;border:1px solid rgba(244,238,230,.3);border-radius:50%;background:rgba(20,17,16,.3);color:var(--paper);cursor:pointer;align-items:center;justify-content:center;flex-direction:column}
+.menu-btn span,.menu-btn::before,.menu-btn::after{content:"";display:block;width:18px;height:1px;background:currentColor;transition:.25s var(--ease)}
+.menu-btn span{margin:5px 0}.menu-btn[aria-expanded="true"] span{opacity:0}.menu-btn[aria-expanded="true"]::before{transform:translateY(6px) rotate(45deg)}.menu-btn[aria-expanded="true"]::after{transform:translateY(-6px) rotate(-45deg)}
+.mobile-nav{position:fixed;inset:0;z-index:180;background:rgba(20,17,16,.98);display:none;align-content:center;padding:100px 8vw 48px;opacity:0;visibility:hidden;transition:.3s var(--ease)}
+.mobile-nav.open{opacity:1;visibility:visible}
+.mobile-nav a{display:block;font-family:var(--serif);font-size:clamp(34px,11vw,58px);line-height:1.15;padding:10px 0;border-bottom:1px solid var(--line)}
+.mobile-nav .mobile-cta{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;border:0;margin-top:28px;color:var(--gold)}
 
 /* ---------- HERO (scroll-scrub canvas) ---------- */
-#hero{position:relative;height:400vh}
-.hero-stage{position:sticky;top:0;height:100vh;overflow:hidden}
+#hero{position:relative;height:220vh}
+.hero-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:url('hero/f_001.webp') center/cover no-repeat}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-veil{position:absolute;inset:0;background:radial-gradient(ellipse 62% 48% at 50% 44%,rgba(20,17,16,.6),transparent 72%),linear-gradient(180deg,rgba(20,17,16,.6) 0%,rgba(20,17,16,.24) 30%,rgba(20,17,16,.4) 58%,rgba(20,17,16,.9) 100%)}
 .hero-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
@@ -152,7 +154,7 @@ section.blk{padding:clamp(80px,11vw,150px) 0;position:relative}
 .feat .inner{position:relative;padding:clamp(90px,14vw,190px) 0}
 .feat h2{font-family:var(--serif);font-size:clamp(38px,6vw,86px);line-height:1.05;margin:14px 0 30px}
 .play{width:88px;height:88px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;
-  margin:0 auto 26px;transition:.4s var(--ease);cursor:pointer}
+  margin:0 auto 26px;transition:.4s var(--ease);cursor:pointer;background:transparent;padding:0}
 .play:hover{background:var(--gold);transform:scale(1.06)}
 .play svg{width:26px;height:26px;fill:var(--paper)}
 .play:hover svg{fill:var(--ink)}
@@ -328,6 +330,8 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
 @media(prefers-reduced-motion:reduce){
   .hero-content::after{animation:none;opacity:0}
   .card .ph::before,.cta-card::before,.brand-card::before{display:none}
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
 /* then & now compare slider (device borrowed from the social campaign board) */
@@ -346,10 +350,23 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
 .cmp-hint{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:4;font-size:10px;letter-spacing:.22em;
   text-transform:uppercase;color:rgba(255,255,255,.7);pointer-events:none;animation:cmpPulse 2.4s ease-in-out infinite}
 @keyframes cmpPulse{0%,100%{opacity:.4}50%{opacity:.9}}
-.compare .draft-cover{pointer-events:none}
-
 @media(max-width:900px){
   header nav{display:none}
+  header{padding:12px 18px;background:linear-gradient(180deg,rgba(20,17,16,.72),transparent)}
+  header.solid{padding:10px 18px}
+  header .logo{height:38px}
+  .menu-btn{display:flex}
+  .mobile-nav{display:grid}
+  #hero{height:100svh}
+  .hero-content{padding:76px 7vw 40px;justify-content:center}
+  .hero-est{margin-bottom:18px;font-size:10px;letter-spacing:.24em}
+  .hero-h1{font-size:clamp(47px,15vw,72px);line-height:.94}
+  .hero-sub{font-size:14px;line-height:1.55;margin-top:20px}
+  .hero-cta{margin-top:26px;gap:10px}.hero-cta .btn{padding:12px 18px;font-size:10px}
+  .scrollcue{display:none}
+  .prod-scroll{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;-webkit-overflow-scrolling:touch}
+  .prod-track{width:max-content;padding-inline:4vw}
+  .card{scroll-snap-align:start;flex-basis:min(78vw,340px)}
   .brand-card{width:150px;height:92px;padding:18px}
   .watermark{height:22vw}
   .compare{aspect-ratio:4/5}
@@ -362,8 +379,25 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
   .hero-stat{display:none}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Makani Meats",
+  "url":"https://www.makanimeats.com/",
+  "logo":"https://www.makanimeats.com/wp-content/uploads/2022/08/Makani-Meats-Logo-Remastered-JUN-2022-Horizontal-No-Back.png",
+  "foundingDate":"1996",
+  "sameAs":[
+    "https://www.facebook.com/makanimeatco",
+    "https://www.instagram.com/makani_meatco/",
+    "https://www.youtube.com/c/Makanimeats2001"
+  ]
+}
+</script>
 </head>
 <body>
+
+<a class="skip-link" href="#story">Skip to main content</a>
 
 <!-- LOADER -->
 <div id="loader">
@@ -377,17 +411,25 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
 <div class="cursor-dot" id="cDot"></div>
 
 <!-- HEADER -->
-<header id="hdr">
-  <a href="#top"><img class="logo" src="https://www.makanimeats.com/wp-content/uploads/2022/08/Makani-Meats-Logo-Remastered-JUN-2022-Horizontal-No-Back.png" alt="Makani Meats"></a>
+<header id="hdr" class="show">
+  <a href="#top" aria-label="Makani Meats home"><img class="logo" src="https://www.makanimeats.com/wp-content/uploads/2022/08/Makani-Meats-Logo-Remastered-JUN-2022-Horizontal-No-Back.png" alt="Makani Meats"></a>
   <nav>
-    <a href="#story">Our Story</a>
-    <a href="#products">Products</a>
-    <a href="#operations">Operations</a>
-    <a href="#sustainability">Sustainability</a>
+    <a href="https://www.makanimeats.com/about-us/">About Us</a>
+    <a href="https://www.makanimeats.com/our-brands/">Our Brands</a>
+    <a href="https://www.makanimeats.com/our-operations/">Operations</a>
     <a href="#depots">Depots</a>
-    <a href="#contact" class="btn btn-gold" style="padding:10px 20px">Get a Quote</a>
+    <a href="https://www.makanimeats.com/contact-us/" class="btn btn-gold" style="padding:10px 20px">Get a Quote</a>
   </nav>
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open navigation"><span></span></button>
 </header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="https://www.makanimeats.com/about-us/">About Us</a>
+  <a href="https://www.makanimeats.com/our-brands/">Our Brands</a>
+  <a href="https://www.makanimeats.com/our-operations/">Our Operations</a>
+  <a href="#depots">Our Depots</a>
+  <a class="mobile-cta" href="https://www.makanimeats.com/contact-us/">Request a quote →</a>
+</nav>
 
 <!-- HERO : scroll-scrub drone flyover -->
 <section id="hero" data-scr="Hero">
@@ -400,8 +442,8 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
       <h1 class="hero-h1"><span data-h="l1">Thirty years of Australia's</span> <span class="l2" data-h="l2"><em>finest</em> meat.</span></h1>
       <p class="hero-sub" data-h="sub">Proudly 100% Australian owned. From our paddocks to your door, beef, lamb and pork of a standard three decades in the making.</p>
       <div class="hero-cta" data-h="cta">
-        <a href="#story" class="btn btn-gold">Our Story</a>
-        <a href="#contact" class="btn btn-ghost">Get a Quote</a>
+        <a href="#story" class="btn btn-gold">Discover Our Story</a>
+        <a href="https://www.makanimeats.com/contact-us/" class="btn btn-ghost">Get a Quote</a>
       </div>
     </div>
     <div class="hero-stat" data-h="stat">
@@ -433,8 +475,8 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
   <div class="inner wrap">
     <div class="over reveal">Our Story, In Motion</div>
     <h2 class="reveal">Thirty years, from paddock to plate.</h2>
-    <div class="play reveal" id="playBtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <a class="btn btn-line reveal" id="watchLink">Watch the Film</a>
+    <button class="play reveal" id="playBtn" type="button" aria-label="Play the Makani thirty-year film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="btn btn-line reveal" id="watchLink" type="button">Watch the Film</button>
   </div>
 </section>
 
@@ -445,7 +487,7 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
       <div class="over">The Range</div>
       <h2 class="serif" style="font-size:clamp(36px,5vw,66px);margin-top:14px">Australia's finest, cut to order.</h2>
     </div>
-    <a href="#contact" class="btn btn-line reveal">Request a Price List →</a>
+    <a href="https://www.makanimeats.com/our-brands/" class="btn btn-line reveal">Explore Our Range →</a>
   </div>
   <div class="prod-scroll">
     <div class="prod-track wrap" id="prodTrack"></div>
@@ -523,7 +565,7 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
   <div class="wrap sec-head reveal" style="margin-bottom:40px">
     <div class="over">Our Brands</div>
     <h2 class="serif" style="font-size:clamp(34px,5vw,62px);margin-top:14px">The finest names, under one roof.</h2>
-    <p class="lede">From premium Black Angus and Wagyu to certified organic and prime lamb, Makani carries Australia's most trusted brands.</p>
+    <p class="lede">From premium Black Angus and Wagyu to certified organic beef and prime lamb, Makani brings Australia's finest names together.</p>
   </div>
   <div class="brand-rows">
     <div class="brand-lane"><div class="brand-track" id="brandTop"></div></div>
@@ -552,8 +594,8 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
     <div class="over reveal" style="margin-bottom:22px">Here's to the Next Thirty</div>
     <h2 class="serif reveal">Here's to the next thirty.</h2>
     <div class="b reveal">
-      <a href="mailto:sales@makanimeats.com?subject=Quote%20request" class="btn btn-gold">Get a Quote</a>
-      <a href="mailto:sales@makanimeats.com?subject=Price%20list%20request" class="btn btn-ghost">Request a Price List</a>
+      <a href="https://www.makanimeats.com/contact-us/" class="btn btn-gold">Get a Quote</a>
+      <a href="https://www.makanimeats.com/our-brands/" class="btn btn-ghost">Explore Our Range</a>
     </div>
   </div>
   <div class="cta-rows">
@@ -573,8 +615,12 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
   <div class="wrap">
     <div class="over reveal">@makanimeatco</div>
     <h2 class="reveal">Let's get social.</h2>
-    <p class="reveal">Thirty years of stories, cuts and characters. Follow along, and tag us; we love seeing Makani on the pass.</p>
+    <p class="reveal">Thirty years of stories, cuts and characters. Follow along and tag us. We love seeing Makani on the pass.</p>
     <div class="grid" id="socGrid"></div>
+    <p class="reveal" style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-gold" href="https://www.instagram.com/makani_meatco/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-ghost" href="https://www.facebook.com/makanimeatco" target="_blank" rel="noopener">Facebook</a>
+    </p>
   </div>
 </section>
 
@@ -583,24 +629,20 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
   <div class="wrap">
     <div class="top">
       <div>
-        <h2 class="serif">Join the Makani list.</h2>
-        <p style="color:var(--muted-2);max-width:440px;line-height:1.7">Seasonal availability, market pricing and the occasional cut above, straight to your inbox.</p>
-        <form class="sub" onsubmit="var e=this.querySelector('input');window.location.href='mailto:sales@makanimeats.com?subject=Subscribe&body='+encodeURIComponent(e?e.value:'');return false;">
-          <input type="email" placeholder="Your email" aria-label="Email">
-          <button class="btn btn-gold" type="submit">Subscribe</button>
-        </form>
+        <h2 class="serif">Talk to Makani.</h2>
+        <p style="color:var(--muted-2);max-width:440px;line-height:1.7">Ask about availability, pricing or the right range for your business. Our team will point you in the right direction.</p>
+        <p style="margin-top:24px"><a class="btn btn-gold" href="https://www.makanimeats.com/contact-us/">Contact Our Team</a></p>
       </div>
       <div class="cols">
-        <div class="col"><h4>Explore</h4><a href="#story">Our Story</a><a href="#products">Products</a><a href="#operations">Operations</a><a href="#depots">Depots</a></div>
-        <div class="col"><h4>Company</h4><a href="#sustainability">Sustainability</a><a href="#contact">Contact</a><a href="#film">The Film</a></div>
+        <div class="col"><h4>Explore</h4><a href="https://www.makanimeats.com/about-us/our-story/">Our Story</a><a href="https://www.makanimeats.com/our-brands/">Our Brands</a><a href="https://www.makanimeats.com/our-operations/">Operations</a><a href="#depots">Depots</a></div>
+        <div class="col"><h4>Company</h4><a href="https://www.makanimeats.com/our-operations/sustainability/">Sustainability</a><a href="https://www.makanimeats.com/contact-us/">Contact</a><a href="#film">The Film</a></div>
       </div>
     </div>
     <div class="base">
       <span>© 2026 Makani Meats · 1996–2026 · Thirty years in the trade.</span>
-      <div class="legal"><a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><a href="#">Contact</a></div>
+      <div class="legal"><a href="https://www.makanimeats.com/about-us/terms-conditions/">Terms &amp; Conditions</a><a href="https://www.makanimeats.com/about-us/privacy-policy/">Privacy Policy</a><a href="https://www.makanimeats.com/contact-us/">Contact</a></div>
     </div>
   </div>
-  <!-- watermark band -->
   <div class="watermark">
     <img src="https://www.makanimeats.com/wp-content/uploads/2022/08/Makani-Meats-Logo-Remastered-JUN-2022-Horizontal-No-Back.png" alt="">
     <div class="wm-line"><span class="serif">Thirty years strong. <em>Still Australia's finest.</em></span></div>
@@ -608,9 +650,9 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
 </footer>
 
 <!-- video modal -->
-<div id="vmodal" style="position:fixed;inset:0;z-index:9000;background:rgba(10,9,8,.94);display:none;align-items:center;justify-content:center;padding:5vw">
+<div id="vmodal" role="dialog" aria-modal="true" aria-label="Makani thirty-year film" style="position:fixed;inset:0;z-index:9000;background:rgba(10,9,8,.94);display:none;align-items:center;justify-content:center;padding:5vw">
   <video id="vplayer" src="media/videos/makani-30-real.mp4" controls playsinline controlslist="nodownload noremoteplayback noplaybackrate" disablepictureinpicture oncontextmenu="return false" style="width:min(92vw,1100px);border-radius:8px"></video>
-  <button id="vclose" style="position:absolute;top:24px;right:30px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer">×</button>
+  <button id="vclose" type="button" aria-label="Close film" style="position:absolute;top:24px;right:30px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer">×</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -632,14 +674,14 @@ document.querySelectorAll('[data-img]').forEach(el=>{const k=el.getAttribute('da
 
 /* brand partner logos (repo-hosted) + cta cards */
 const BRANDS=["signature-black-angus","kilcoy-blue-diamond","jacks-creek","junee-gold","ebony-angus","fletcher-lamb","diamantina","southern-ranges","ultra-premium","kilcoy-pure","dmc-black","nolan","emerald-plains","be-campbell","timbarra","augustus","natures-choice"];
-const CTAIMG=["a-cta-a-1","a-cta-a-2","a-cta-a-3","a-cta-a-4","a-cta-a-5","a-cta-a-6"];
+const CTAIMG=["a-prod-beef","a-prod-lamb","a-story-2026","a-ops-plant","a-prod-organic","a-feature-poster"];
 
 /* ---------- data ---------- */
 const STORY=[
   ["1996","Makani Meats is founded, a 100% Australian-owned wholesaler with a simple vision: Australia's finest meat, at honest prices.","a-story-1996"],
   ["2000s","Vertical integration with Grange Foods. Makani now purchases, processes, warehouses and distributes its own meat, complete control over quality.","a-story-2000s"],
   ["2010s","Stringent quality control earns accreditation and access to export markets in the United States, Japan and Korea.","a-story-2010s"],
-  ["Today","An accredited plant with an AUS-MEAT A+ rating, supplying major supermarket, food and restaurant chains nationwide.","a-story-today"],
+  ["Today","An accredited operation supplying supermarket, food-service and restaurant customers across Australia.","a-story-today"],
   ["2026","Thirty years in the trade, and we're only warming up.","a-story-2026"]
 ];
 const PRODS=[
@@ -650,12 +692,12 @@ const PRODS=[
   ["Certified Organic","05","Australian Certified Organic beef, sustainably farmed and certified for flavour and provenance.","a-prod-organic"]
 ];
 const OPS=[["01","Purchase","Sourced direct from sustainable Australian farms we know and trust."],
-  ["02","Process","In a nationally accredited plant with an AUS-MEAT A+ rating, the cutting edge of food safety."],
+  ["02","Process","In an accredited operation built around quality control, consistency and food safety."],
   ["03","Warehouse","Maintained in optimal conditions, compliant with all NSW Meat Industry Authority standards."],
   ["04","Distribute","Our own refrigerated fleet delivers nationwide, paddock to plate, every step owned."]];
-const ACCR=[["ORGANIC","ACO","Australian Certified Organic wholesaler."],
-  ["A+","AUS-MEAT A+","One of Australia's leading rated plants."],
-  ["SAFE","Food Safety","Accredited by all Australian food safety organisations."]];
+const ACCR=[["ORGANIC","Certified Organic","Certified organic options with clear provenance."],
+  ["QC","Quality Control","Quality checks carried through sourcing, processing and delivery."],
+  ["SAFE","Food Safety","Accredited systems designed around safe, consistent supply."]];
 const DEPOTS=[["Sydney","NSW","Australia/Sydney"],["Newcastle","NSW","Australia/Sydney"],["Brisbane","QLD","Australia/Brisbane"],["Perth","WA","Australia/Perth"]];
 const SOCIAL=["a-social-1","a-social-2","a-social-3","a-social-5","a-story-today","a-feature-poster","a-sus-pasture","a-prod-organic"];
 
@@ -679,13 +721,13 @@ const mq2='<span>Here\'s to the Next Thirty</span><span class="dot">·</span><sp
 document.getElementById('mq2').innerHTML=mq2+mq2;
 
 /* brand marquees (two rows, split + duplicated for seamless loop) */
-const brandCard=s=>`<div class="brand-card"><img src="brands/${s}.png" alt="" loading="lazy"></div>`;
+const brandCard=s=>`<a class="brand-card" href="https://www.makanimeats.com/our-brands/" aria-label="Explore ${s.replaceAll('-',' ')}"><img src="brands/${s}.png" alt="${s.replaceAll('-',' ')}" decoding="async"></a>`;
 const bHalf=Math.ceil(BRANDS.length/2);
 const bTop=BRANDS.slice(0,bHalf), bBot=BRANDS.slice(bHalf);
 document.getElementById('brandTop').innerHTML=(bTop.map(brandCard).join(''))+(bTop.map(brandCard).join(''));
 document.getElementById('brandBot').innerHTML=(bBot.map(brandCard).join(''))+(bBot.map(brandCard).join(''));
 /* cta scrolling cards */
-const ctaCard=k=>`<div class="cta-card"><img src="${IMG[k]||''}" alt="" loading="lazy"></div>`;
+const ctaCard=k=>`<div class="cta-card"><img src="${IMG[k]||''}" alt="Makani Meats quality, provenance and nationwide supply" decoding="async"></div>`;
 document.getElementById('ctaTop').innerHTML=(CTAIMG.map(ctaCard).join(''))+(CTAIMG.map(ctaCard).join(''));
 const ctaB=[...CTAIMG].reverse();
 document.getElementById('ctaBot').innerHTML=(ctaB.map(ctaCard).join(''))+(ctaB.map(ctaCard).join(''));
@@ -702,23 +744,35 @@ clocks();setInterval(clocks,30000);
 
 /* video modal */
 const vm=document.getElementById('vmodal'),vp=document.getElementById('vplayer');
-function openV(){vm.style.display='flex';vp.play();}
-function closeV(){vm.style.display='none';vp.pause();}
+function openV(){vm.style.display='flex';vp.play().catch(()=>{});document.getElementById('vclose').focus();}
+function closeV(){vm.style.display='none';vp.pause();document.getElementById('playBtn').focus();}
 document.getElementById('playBtn').onclick=openV;
 document.getElementById('watchLink').onclick=openV;
 document.getElementById('vclose').onclick=closeV;
 vm.onclick=e=>{if(e.target===vm)closeV();};
 
 /* ---------- HERO frame preload + loader ---------- */
-const FRAMES=100, PAD=n=>String(n).padStart(3,'0');
+const FULL_MOTION=innerWidth>900&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(navigator.connection&&navigator.connection.saveData);
+const FRAMES=FULL_MOTION?100:1, PAD=n=>String(n).padStart(3,'0');
 const imgs=[]; let loaded=0;
 const canvas=document.getElementById('hero-canvas'), ctx=canvas.getContext('2d');
 function sizeCanvas(){const dpr=Math.min(devicePixelRatio||1,2);canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
 sizeCanvas();addEventListener('resize',()=>{sizeCanvas();drawFrame(cur);});
 function cover(img){const cw=innerWidth,ch=innerHeight,ir=img.width/img.height,cr=cw/ch;let w,h,x,y;if(ir>cr){h=ch;w=ch*ir;x=(cw-w)/2;y=0;}else{w=cw;h=cw/ir;x=0;y=(ch-h)/2;}ctx.drawImage(img,x,y,w,h);}
 let cur=0;
-function drawFrame(i){i=Math.max(0,Math.min(FRAMES-1,Math.round(i)));const im=imgs[i];if(im&&im.complete&&im.naturalWidth){ctx.clearRect(0,0,innerWidth,innerHeight);cover(im);cur=i;}}
-for(let i=1;i<=FRAMES;i++){const im=new Image();im.onload=()=>{loaded++;const p=Math.round(loaded/FRAMES*100);document.getElementById('lbar').style.width=p+'%';document.getElementById('lpct').textContent=p+'%';if(loaded===FRAMES)start();};im.onerror=()=>{loaded++;if(loaded===FRAMES)start();};im.src=`hero/f_${PAD(i)}.webp`;imgs.push(im);}
+function drawFrame(i){
+  i=Math.max(0,Math.min(FRAMES-1,Math.round(i)));
+  let im=imgs[i];
+  if(!(im&&im.complete&&im.naturalWidth)) im=imgs.slice(0,i+1).reverse().find(x=>x&&x.complete&&x.naturalWidth)||imgs.find(x=>x&&x.complete&&x.naturalWidth);
+  if(im){ctx.clearRect(0,0,innerWidth,innerHeight);cover(im);cur=i;}
+}
+for(let i=1;i<=FRAMES;i++){
+  const im=new Image();
+  if(i===1) im.fetchPriority='high';
+  im.onload=()=>{loaded++;const p=Math.round(loaded/FRAMES*100);document.getElementById('lbar').style.width=p+'%';document.getElementById('lpct').textContent=p+'%';if(i===1||loaded===FRAMES)start();};
+  im.onerror=()=>{loaded++;if(i===1||loaded===FRAMES)start();};
+  im.src=`hero/f_${PAD(i)}.webp`;imgs.push(im);
+}
 
 /* ---------- start (after preload) ---------- */
 let started=false;
@@ -727,19 +781,25 @@ function start(){
   drawFrame(0);
   setTimeout(()=>document.getElementById('loader').classList.add('done'),300);
 
+  const hdr=document.getElementById('hdr');
+  hdr.classList.add('show');
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'||typeof Lenis==='undefined'){
+    document.querySelectorAll('.reveal').forEach(r=>{r.style.opacity='1';r.style.transform='none';});
+    return;
+  }
+
   const lenis=new Lenis({lerp:.09,wheelMultiplier:1});
   lenis.on('scroll',ScrollTrigger.update);
   gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
   gsap.registerPlugin(ScrollTrigger);
 
   /* progress bar + header */
-  const hdr=document.getElementById('hdr');
   ScrollTrigger.create({start:0,end:'max',onUpdate:s=>{document.getElementById('progress').style.width=(s.progress*100)+'%';}});
-  ScrollTrigger.create({trigger:'#hero',start:'top+=80 top',onEnter:()=>hdr.classList.add('show','solid'),onLeaveBack:()=>hdr.classList.remove('show','solid')});
+  ScrollTrigger.create({trigger:'#hero',start:'top+=80 top',onEnter:()=>hdr.classList.add('solid'),onLeaveBack:()=>hdr.classList.remove('solid')});
 
   /* HERO scrub */
   const heroFrame={f:0};
-  gsap.to(heroFrame,{f:FRAMES-1,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.5},onUpdate:()=>drawFrame(heroFrame.f)});
+  if(FULL_MOTION) gsap.to(heroFrame,{f:FRAMES-1,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.5},onUpdate:()=>drawFrame(heroFrame.f)});
   /* hero intro: plays on load so the hero is FULL on arrival (not blank until scroll) */
   gsap.timeline({delay:.25})
     .from('[data-h=est]',{opacity:0,y:20,duration:.7,ease:'power3.out'})
@@ -750,11 +810,13 @@ function start(){
     .from('.hero-stat > div',{opacity:0,y:18,duration:.7,stagger:.12,ease:'power3.out'},'-=.55');
 
   /* hero exit: scrubbed across the pin */
-  gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.6}})
-    .to('.scrollcue',{opacity:0,duration:.15},.05)
-    .to('.hero-content',{opacity:0,y:-40,duration:.35},.62)
-    .to('.hero-stat',{opacity:0,duration:.3},.62);
-  gsap.to('#ghostYears',{y:-120,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  if(FULL_MOTION){
+    gsap.timeline({scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom bottom',scrub:.6}})
+      .to('.scrollcue',{opacity:0,duration:.15},.05)
+      .to('.hero-content',{opacity:0,y:-40,duration:.35},.62)
+      .to('.hero-stat',{opacity:0,duration:.3},.62);
+    gsap.to('#ghostYears',{y:-120,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  }
 
   /* count-up hero stats */
   document.querySelectorAll('[data-count]').forEach(n=>{
@@ -778,7 +840,7 @@ function start(){
   /* products horizontal scroll */
   const track=document.getElementById('prodTrack');
   const dist=()=>Math.max(0,track.scrollWidth-innerWidth+ (innerWidth*.06));
-  gsap.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#products',start:'top top',end:()=>'+='+dist(),scrub:.6,pin:true,anticipatePin:1,invalidateOnRefresh:true}});
+  if(innerWidth>900) gsap.to(track,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:'#products',start:'top top',end:()=>'+='+dist(),scrub:.6,pin:true,anticipatePin:1,invalidateOnRefresh:true}});
 
   /* parallax images */
   document.querySelectorAll('.feat .bg img,.sus .bg img,.ops .visual img,.graze img,.dep .team img').forEach(im=>{
@@ -801,35 +863,14 @@ function start(){
   ScrollTrigger.refresh();
 }
 /* fail-safe: if frames stall, start after 6s */
-setTimeout(()=>{if(!started)start();},6000);
+setTimeout(()=>{if(!started)start();},2200);
 
-/* ---------- copy deterrents + DRAFT ONLY overlay ---------- */
-['contextmenu','dragstart'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{capture:true}));
-addEventListener('keydown',e=>{const k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u')){e.preventDefault();}},{capture:true});
-function draftTag(){
-  document.querySelectorAll('img,video,#hero-canvas').forEach(m=>{
-    if(m.dataset.dft||m.closest('#loader'))return;
-    if(m.tagName==='IMG'){
-      if(m.closest('header')||m.closest('footer'))return;                 // skip site logos
-      if(/logo/i.test(m.getAttribute('src')||''))return;
-      const r=m.getBoundingClientRect(); if(r.width&&r.width<170)return;   // skip small logos/icons
-    }
-    m.dataset.dft='1';
-    const big=m.tagName!=='IMG';
-    let host=m.parentElement; if(!host)return;
-    if(m.tagName==='IMG'&&host.querySelectorAll(':scope > img').length>1){ // per-image wrap when shared
-      const w=document.createElement('span'); w.className='draft-wrap';
-      m.parentNode.insertBefore(w,m); w.appendChild(m); host=w;
-    }
-    if(getComputedStyle(host).position==='static')host.style.position='relative';
-    const wm=document.createElement('span'); wm.className='draft-wm'+(big?' big':''); wm.textContent='DRAFT ONLY';
-    host.appendChild(wm);
-    if(m.tagName==='IMG'){const cv=document.createElement('span'); cv.className='draft-cover'; host.appendChild(cv);}
-  });
-}
-draftTag();
-let _dt; addEventListener('scroll',()=>{clearTimeout(_dt);_dt=setTimeout(draftTag,140);},{passive:true});
-setTimeout(draftTag,1600); setTimeout(draftTag,4000);
+/* ---------- mobile navigation ---------- */
+const menuBtn=document.getElementById('menuBtn'),mobileNav=document.getElementById('mobileNav');
+function closeMenu(){menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open navigation');mobileNav.classList.remove('open');document.body.style.overflow='';}
+menuBtn.addEventListener('click',()=>{const open=menuBtn.getAttribute('aria-expanded')==='true';if(open){closeMenu();return;}menuBtn.setAttribute('aria-expanded','true');menuBtn.setAttribute('aria-label','Close navigation');mobileNav.classList.add('open');document.body.style.overflow='hidden';});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();if(vm.style.display==='flex')closeV();}});
 
 /* ---------- Then & Now: drag-to-reveal compare ---------- */
 document.querySelectorAll('.compare').forEach(c=>{
