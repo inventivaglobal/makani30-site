@@ -272,9 +272,12 @@ section.blk{padding:clamp(80px,11vw,150px) 0;position:relative}
 .social h2{font-family:var(--serif);font-size:clamp(36px,5vw,64px);margin:14px 0 12px}
 .social p{color:#6E6257;max-width:520px;margin:0 auto 40px;line-height:1.7}
 .social .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.social .grid .t{aspect-ratio:1;overflow:hidden;border-radius:6px}
+.social .grid .t{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:6px;background:#ded7cf}
 .social .grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .social .grid .t:hover img{transform:scale(1.08)}
+.social .grid .t::after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(transparent,rgba(20,17,16,.72));pointer-events:none}
+.social .grid .t span{position:absolute;z-index:2;left:15px;bottom:14px;color:#fff;font-size:9px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 7px rgba(0,0,0,.35)}
 
 /* footer */
 footer{background:var(--ink);padding:clamp(70px,9vw,120px) 0 40px;border-top:1px solid var(--line)}
@@ -691,9 +694,9 @@ body.cursor-hover .cursor-ring{width:56px;height:56px;background:rgba(199,154,98
 <!-- SOCIAL -->
 <section class="blk social" data-scr="Social">
   <div class="wrap">
-    <div class="over reveal">@makanimeatco</div>
-    <h2 class="reveal">Let's get social.</h2>
-    <p class="reveal">Thirty years of stories, cuts and characters. Follow along and tag us. We love seeing Makani on the pass.</p>
+    <div class="over reveal">Makani 30 · New Campaign Imagery</div>
+    <h2 class="reveal">A fresh view of the Makani standard.</h2>
+    <p class="reveal">Country, cold chain, craft and the table. A contemporary visual series created for the thirty-year campaign.</p>
     <div class="grid" id="socGrid"></div>
     <p class="reveal" style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
       <a class="btn btn-gold" href="https://www.instagram.com/makani_meatco/" target="_blank" rel="noopener">Instagram</a>
@@ -805,7 +808,16 @@ const ACCR=[
   ["SUSTAIN","Sustainability Commitment","Farming practice, land care, food safety and long-term stewardship work together.","https://www.makanimeats.com/our-operations/sustainability/"]
 ];
 const DEPOTS=[["Sydney","NSW","Australia/Sydney"],["Newcastle","NSW","Australia/Sydney"],["Brisbane","QLD","Australia/Brisbane"],["Perth","WA","Australia/Perth"]];
-const SOCIAL=["a-social-1","a-social-2","a-social-3","a-social-5","a-story-today","a-feature-poster","a-sus-pasture","a-prod-organic"];
+const SOCIAL=[
+  ["media/images/campaign-modern/country.webp","Country","Black Angus cattle moving beside a farm dam in green Australian country"],
+  ["media/images/campaign-modern/coldstore.webp","Cold Chain","Cold-store team member checking inventory"],
+  ["media/images/campaign-modern/quality.webp","Quality Control","Temperature verification in refrigerated storage"],
+  ["media/images/campaign-modern/tbone.webp","The Cut","Premium T-bone steak prepared for service"],
+  ["media/images/campaign-modern/butcher.webp","Butcher Craft","Butcher trimming a premium beef cut"],
+  ["media/images/campaign-modern/range.webp","Premium Range","Vacuum-packed premium beef in refrigerated display"],
+  ["media/images/campaign-modern/table.webp","At the Table","Rolled beef roast being tied with herbs"],
+  ["media/images/campaign-modern/community.webp","Community","Community barbecue at sunset"]
+];
 
 /* build DOM */
 const el=(h)=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild;};
@@ -820,7 +832,7 @@ ACCR.forEach(([ic,h,d,href])=>ar.appendChild(el(`<a class="item reveal" href="${
 const dl=document.getElementById('depList');
 DEPOTS.forEach(([c,s,tz])=>dl.appendChild(el(`<div class="d reveal"><div class="city">${c}</div><div class="clk" data-tz="${tz}">—</div><div class="st">${s}</div></div>`)));
 const sg=document.getElementById('socGrid');
-SOCIAL.forEach(img=>sg.appendChild(el(`<div class="t reveal"><img src="${IMG[img]||''}" alt=""></div>`)));
+SOCIAL.forEach(([src,label,alt])=>sg.appendChild(el(`<div class="t reveal"><img src="${src}" alt="${alt}" loading="lazy" decoding="async"><span>${label}</span></div>`)));
 const mqhtml='<span>Est. 1996</span><span class="dot">·</span><span>Thirty Years in the Trade</span><span class="dot">·</span><span>Australia\'s Finest Meat</span><span class="dot">·</span><span>100% Australian Owned</span><span class="dot">·</span>';
 document.getElementById('mq1').innerHTML=mqhtml+mqhtml;
 const mq2='<span>Here\'s to the Next Thirty</span><span class="dot">·</span><span>Beef · Lamb · Pork</span><span class="dot">·</span><span>Paddock to Plate</span><span class="dot">·</span><span>Since 1996</span><span class="dot">·</span>';
